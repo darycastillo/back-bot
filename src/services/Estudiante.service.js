@@ -8,9 +8,11 @@ const CursoModel = require("../models/Curso.model");
 class EstudianteService {
   EstudianteService() {}
 
-  async consultarEstudiantes() {
+  async consultarEstudiantes(query = {}) {
+    const manyFields = query.manyFields;
+    const method = !manyFields ? "find" : "findOne";
     try {
-      return await EstudianteModel.find()
+      return await EstudianteModel[method](query)
         .populate("usuario")
         .populate("cursos");
     } catch (error) {
@@ -18,10 +20,9 @@ class EstudianteService {
     }
   }
 
-  
   async consultarEstudiantesByIdCurso(_id) {
     try {
-      return await EstudianteModel.find({cursos: _id})
+      return await EstudianteModel.find({ cursos: _id })
         .populate("usuario")
         .populate("cursos");
     } catch (error) {

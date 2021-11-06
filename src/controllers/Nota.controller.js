@@ -3,12 +3,11 @@ const NotaService = require('../services/Nota.service');
 
 const consultarNota = async (req, res) => {
     res.json({
-        Nota: await NotaService.consultarNota()
+      Nota: await NotaService.consultarNota(req.query),
     });
 }
 //aqui me quede
 const guardarNotasXLSX = async (req, res) => {
-    console.log(req.body);
     res.json({
         notas: await NotaService.guardarNotasXLSX(req.body.notas)
     });

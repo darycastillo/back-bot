@@ -1,8 +1,9 @@
 const EstudianteService = require("../services/Estudiante.service");
 
 const consultaEstudiantes = async (req, res) => {
+  const query = req.query;
   res.json({
-    Estudiantes: await EstudianteService.consultarEstudiantes(),
+    Estudiantes: await EstudianteService.consultarEstudiantes(query),
   });
 };
 
